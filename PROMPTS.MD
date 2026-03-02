@@ -25,3 +25,15 @@
 ### Resolving AI Remote Binding Warning
 **Prompt:** "Wrangler shows a warning: `AI bindings always access remote resources... set remote: true for the binding definition`. How to fix this in wrangler.jsonc?"
 **Result:** Added `"remote": true` to the AI binding configuration to suppress the warning and acknowledge remote inference during local development.
+
+### Finalizing Build Subcommands
+**Prompt:** "Build failed with `ERROR Not enough non-option arguments: got 0, need at least 1`. The logs suggest `opennextjs-cloudflare build [args..]` is required."
+**Result:** Corrected the build command in the Cloudflare Dashboard to `npx @opennextjs/cloudflare build`. Understood that the modern OpenNext adapter requires an explicit subcommand to initiate the build process for Cloudflare Pages.
+
+### Resolving TypeError: Cannot read properties of undefined (reading 'default')
+**Prompt:** "My API route fails with a TypeError reading 'default' in production. Logs show the request is reaching the worker but crashing instantly. How to safely access bindings in Next.js Edge runtime on Cloudflare?"
+**Result:** Diagnosed as a binding access issue in the Edge runtime. Implemented a more robust access pattern checking both `process.env` and `globalThis` for the `AI` and `CHAT_HISTORY` objects. Added explicit checks and fallback logging to identify missing bindings during the request lifecycle.
+
+### Environment Disparity & Local Debugging
+**Prompt:** "Next.js dev server (`npm run dev`) shows `AI check: false`. Why do bindings fail locally but the build succeeds?"
+**Result:** Understood that standard Node.js environments do not inject Cloudflare-specific bindings. Learned to use `wrangler pages dev` to simulate the Cloudflare runtime locally and verified that production bindings must be manually attached and followed by a Redeploy in the Cloudflare Dashboard to be accessible via `process.env`.
