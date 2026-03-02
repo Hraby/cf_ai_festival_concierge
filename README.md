@@ -4,15 +4,10 @@ An AI-powered digital concierge for ZlinFest (International Film Festival for Ch
 
 **Live Demo:** https://cf-ai-festival-concierge.hrabyyt.workers.dev/
 
----
-
 ## 🚀 Key Features
 - **Intelligent Multilingual Support:** Automatically detects browser language (CS/EN) and adapts the UI and AI personality instantly.
 - **Persistent Memory:** Utilizes Cloudflare KV to maintain chat history across sessions using unique session identifiers.
-- **Premium Startup UI:** A minimalist, "SaaS-style" interface optimized for 2026 web standards (Next.js 16 + Tailwind 4).
 - **Edge Performance:** Running on Cloudflare Pages with Edge Runtime for sub-second response times globally.
-
----
 
 ## 🛠️ Architecture & Requirements (Cloudflare Stack)
 
@@ -22,15 +17,11 @@ This project strictly follows the assignment requirements:
 3.  **User Input:** Interactive chat interface built with **React 19** and **Lucide Icons**.
 4.  **Memory / State:** **Cloudflare KV** (Key-Value storage) handles the persistent state of conversations.
 
----
-
 ## 📂 Project Structure
 - `src/app/api/chat/route.ts`: Edge API route handling LLM orchestration and KV state.
 - `src/app/page.tsx`: Premium chat interface with auto-language detection.
 - `PROMPTS.md`: Detailed log of AI-assisted development steps.
 - `wrangler.jsonc`: Cloudflare configuration for bindings.
-
----
 
 ## 🛠️ Local Development
 
