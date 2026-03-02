@@ -14,10 +14,6 @@
 **Prompt:** "TypeScript is throwing errors like `Property 'get' does not exist on type 'string'` because `process.env` expects strings, but Cloudflare injects objects. I also get `Property 'message' does not exist on type 'unknown'` from `req.json()`. How do I type this correctly without disabling rules?"
 **Result:** Created a custom `CloudflareBindings` interface defining the `.run`, `.get`, and `.put` methods. Asserted `req.json()` as an object with `message` and `sessionId`, and cast `process.env` to the custom interface, resolving all strict TypeScript compilation errors elegantly.
 
-### Frontend Chat Interface (React / Tailwind)
-**Prompt:** "Create a modern, responsive chat UI in `app/page.tsx` using Next.js App Router (`use client`). It needs to maintain local state for messages, generate a random `sessionId` on mount (to avoid SSR hydration errors), send the input to `/api/chat`, display loading states, and use Tailwind CSS for a polished 'ZlinFest Concierge' branding."
-**Result:** Generated a clean UI featuring auto-scrolling to the latest message, disabled input during API calls to prevent race conditions, and integrated `lucide-react` icons for a professional look. The component correctly handles the API response and renders the AI's markdown-like output.
-
 ### Frontend Type Safety
 **Prompt:** "Next.js throws `data is of type unknown` when calling `await response.json()`. How to fix this properly in the chat component?"
 **Result:** Explicitly cast the fetch response to an object containing optional `reply` and `error` strings, ensuring the frontend handles API failures gracefully while staying fully type-safe.
@@ -37,11 +33,3 @@
 ### Environment Disparity & Local Debugging
 **Prompt:** "Next.js dev server (`npm run dev`) shows `AI check: false`. Why do bindings fail locally but the build succeeds?"
 **Result:** Understood that standard Node.js environments do not inject Cloudflare-specific bindings. Learned to use `wrangler pages dev` to simulate the Cloudflare runtime locally and verified that production bindings must be manually attached and followed by a Redeploy in the Cloudflare Dashboard to be accessible via `process.env`.
-
-### Bilingual Support: Intelligent Language Detection
-**Prompt:** "Add bilingual support (CS/EN) to both the UI and AI. The AI should automatically detect the user's language and respond accordingly, while the UI should have a toggle switch. Keep the 'Premium Startup' aesthetic clean and minimalist."
-**Result:** Implemented a translation state machine for the frontend UI. Updated the backend System Prompt to enable automatic language detection in the LLM. Added a subtle language toggle in the header, enhancing accessibility for international visitors while maintaining a high-end SaaS look.
-
-### Automated Browser Language Detection
-**Prompt:** "Make the application detect the user's system language automatically. If the browser is in Czech, start in 'cs' mode; otherwise, default to 'en'. Ensure the first AI message is also localized accordingly without causing SSR hydration mismatches."
-**Result:** Implemented a `useEffect` hook to intercept the browser's `navigator.language` property. The app now dynamically switches its entire UI and initial AI greeting based on the user's environment, providing a frictionless entry point for both local and international festival visitors.
