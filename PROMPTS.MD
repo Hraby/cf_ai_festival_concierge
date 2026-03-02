@@ -37,3 +37,11 @@
 ### Environment Disparity & Local Debugging
 **Prompt:** "Next.js dev server (`npm run dev`) shows `AI check: false`. Why do bindings fail locally but the build succeeds?"
 **Result:** Understood that standard Node.js environments do not inject Cloudflare-specific bindings. Learned to use `wrangler pages dev` to simulate the Cloudflare runtime locally and verified that production bindings must be manually attached and followed by a Redeploy in the Cloudflare Dashboard to be accessible via `process.env`.
+
+### Bilingual Support: Intelligent Language Detection
+**Prompt:** "Add bilingual support (CS/EN) to both the UI and AI. The AI should automatically detect the user's language and respond accordingly, while the UI should have a toggle switch. Keep the 'Premium Startup' aesthetic clean and minimalist."
+**Result:** Implemented a translation state machine for the frontend UI. Updated the backend System Prompt to enable automatic language detection in the LLM. Added a subtle language toggle in the header, enhancing accessibility for international visitors while maintaining a high-end SaaS look.
+
+### Automated Browser Language Detection
+**Prompt:** "Make the application detect the user's system language automatically. If the browser is in Czech, start in 'cs' mode; otherwise, default to 'en'. Ensure the first AI message is also localized accordingly without causing SSR hydration mismatches."
+**Result:** Implemented a `useEffect` hook to intercept the browser's `navigator.language` property. The app now dynamically switches its entire UI and initial AI greeting based on the user's environment, providing a frictionless entry point for both local and international festival visitors.
