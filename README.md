@@ -1,42 +1,53 @@
-# 🎡 cf_ai_festival_concierge
+# cf_ai_festival_concierge
 
-An AI-powered digital concierge for ZlinFest (International Film Festival for Children and Youth). This application serves as a high-end, localized assistant for festival visitors, built entirely on the Cloudflare ecosystem.
+Digital concierge for ZlinFest 2026. Built on Cloudflare Workers AI and Next.js.
 
-**Live Demo:** https://cf-ai-festival-concierge.hrabyyt.workers.dev/
+[Live Demo](https://cf-ai-festival-concierge.hrabyyt.workers.dev/)
 
-## 🚀 Key Features
-- **Intelligent Multilingual Support:** Automatically detects browser language (CS/EN) and adapts the UI and AI personality instantly.
-- **Persistent Memory:** Utilizes Cloudflare KV to maintain chat history across sessions using unique session identifiers.
-- **Edge Performance:** Running on Cloudflare Pages with Edge Runtime for sub-second response times globally.
+## Tech Stack
+- **Framework**: Next.js 16 (App Router)
+- **Runtime**: Cloudflare Pages (Edge)
+- **LLM**: Llama 3.3 (70B/8B) via Workers AI
+- **State**: Cloudflare KV
+- **Deployment**: OpenNext
 
-## 🛠️ Architecture & Requirements (Cloudflare Stack)
+## Features
+- **Language Detection**: Automatic UI/LLM localization based on browser headers.
+- **Session Persistence**: Chat history maintained via KV store.
+- **Edge Native**: Zero-latency global delivery.
 
-This project strictly follows the assignment requirements:
-1.  **LLM:** Powered by **Llama 3.3 (70B/8B)** via **Cloudflare Workers AI**.
-2.  **Workflow / Coordination:** Orchestrated using **Cloudflare Pages Functions** and the **OpenNext** adapter for Next.js 16.
-3.  **User Input:** Interactive chat interface built with **React 19** and **Lucide Icons**.
-4.  **Memory / State:** **Cloudflare KV** (Key-Value storage) handles the persistent state of conversations.
+## Local Development
 
-## 📂 Project Structure
-- `src/app/api/chat/route.ts`: Edge API route handling LLM orchestration and KV state.
-- `src/app/page.tsx`: Premium chat interface with auto-language detection.
-- `PROMPTS.md`: Detailed log of AI-assisted development steps.
-- `wrangler.jsonc`: Cloudflare configuration for bindings.
+### Prerequisites
+- Node.js 20+
+- Wrangler CLI
 
-## 🛠️ Local Development
-
-### 1. Prerequisites
-- Node.js (v20+)
-- Cloudflare Account & Wrangler CLI
-
-### 2. Setup
+### Setup
 ```bash
-# Clone the repository
-git clone https://github.com/hraby/cf_ai_festival_concierge
+git clone [https://github.com/hraby/cf_ai_festival_concierge](https://github.com/hraby/cf_ai_festival_concierge)
 cd cf_ai_festival_concierge
-
-# Install dependencies
 npm install
 
-# Create KV Namespace
+```
+
+### Infrastructure
+
+```bash
+# Create the required KV namespace
 npx wrangler kv namespace create CHAT_HISTORY
+
+```
+
+### Running
+
+```bash
+npm run dev
+
+```
+
+## Structure
+
+* `src/app/api/chat/route.ts` - LLM orchestration and state management.
+* `src/app/page.tsx` - Chat interface and client-side localization.
+* `PROMPTS.md` - Development logs and AI prompt history.
+* `wrangler.jsonc` - Cloudflare configuration.
