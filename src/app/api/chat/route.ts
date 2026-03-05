@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 
-export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-      const cf = await getCloudflareContext();
+      const cf = getCloudflareContext();
       env = cf.env;
     } catch (e) {
       console.log("Bridge not ready, using process.env as fallback");
